@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #MY_APPS:
-    'questionaire'
+    'questionaire',
+   
 ]
 
 MIDDLEWARE = [
@@ -56,7 +59,7 @@ ROOT_URLCONF = 'forms.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS':  [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,3 +123,33 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATICFILES_DIRS is the list of folders where Django will search
+# for additional static files aside from the static folder of each app installed.
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static_my_project"),
+]
+#where to serve files
+#STATIC_ROOT is the folder where static files will be stored after using manage.py collectstatic
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
+
+MEDIA_URL = '/media/'
+#MEDIA_ROOT is the folder where files uploaded using FileField will go.
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
+
+
+# registration settings :
+
+ACCOUNT_ACTIVATION_DAYS =7
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL ='/'
+LOG_OUT_REDIRECT_URL ='/'
+SITE_ID = 1
+REGISTRATION_AUTO_LOGIN = True 
+LOGIN_REDIRECT_URL="/" 
+ALLOWED_HOSTS = [] 
+# mail_settings:
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'devzeinab@gmail.com'
+EMAIL_HOST_PASSWORD = "allaho akbr"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
